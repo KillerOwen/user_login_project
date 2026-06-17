@@ -42,7 +42,14 @@ const loginUser = async (req, res, next) => {
             const auth = await bcrypt.compare(password, userFound.password);
             if(auth){
                 const token = createToken(userFound._id);
-                res.cookie('jwt', token, {httpOnly: true, maxAge: maxAge*1000});
+                res.cookie("jwt", token, {
+                    httpOnly: true,
+                    secure: process.env.NODE_ENV === "production",
+                    sameSite: process.env.NODE_ENV === "production"
+                        ? "none"
+                        : "lax",
+                    maxAge: maxAge * 1000
+                });
                 res.status(200).json({success: true, msg: `Logged in, ${userFound._id}`});
             }
             else{
