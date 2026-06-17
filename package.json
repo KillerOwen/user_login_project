@@ -7,7 +7,8 @@
     "frontend": "vite",
     "backend": "nodemon server.js",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "vite build"
   },
   "dependencies": {
     "@hugeicons/core-free-icons": "^4.2.0",
