@@ -74,7 +74,12 @@ const getUser = async (req, res, next) => {
 
 const logoutUser = async (req, res, next) => {
     res.cookie('jwt', '', {
-        maxAge: 1
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production"
+            ? "none"
+            : "lax",
+        expires: new Date(0)
     });
 
     res.status(200).json({
