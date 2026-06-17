@@ -9,7 +9,8 @@ const connectToDb = async (callback) => {
         callback();
     }
     catch(err){
-        console.error("Failed to connect to Database")
+        console.error("Failed to connect to Database");
+        console.log(err);
         callback(err);
     }
 }
